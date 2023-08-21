@@ -1,3 +1,4 @@
+import argparse
 from oauth2client.service_account import ServiceAccountCredentials
 
 PRIVATE_KEY_JSON = 'sample-app-firebase-adminsdk-foobar.json' ### modify to match your environment
@@ -13,4 +14,13 @@ def get_access_token(private_key_json):
   return access_token_info.access_token
 
 if __name__ == '__main__':
-  print(get_access_token(PRIVATE_KEY_JSON))
+  parser = argparse.ArgumentParser()
+  parser.add_argument('-p', '--private-key-json-file', help="give private key json file")
+  args = parser.parse_args()
+
+  private_key_json = PRIVATE_KEY_JSON
+  if args.private_key_json_file:
+    private_key_json = args.private_key_json_file
+    
+
+  print(get_access_token(args.private_key_json_file))
