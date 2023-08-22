@@ -39,6 +39,22 @@ def get_message_json(target_device_token, template_json_file):
 
   return obj
 
+def get_project_id_from_json(private_key_json_file):
+  """
+  Retrieve the project ID from a given private key JSON file.
+
+  Parameters:
+  - private_key_json (str): Path to the JSON file that contains the private key information.
+
+  Returns:
+  - str: The project ID extracted from the JSON file.
+  """
+
+  with open(private_key_json_file, 'r', encoding='utf-8') as file:
+    obj = json.load(file)
+
+  return obj["project_id"]
+
 if __name__ == '__main__':
   parser = argparse.ArgumentParser()
   parser.add_argument('-p', '--private-key-json-file', help="give private key json file")
