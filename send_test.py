@@ -99,12 +99,29 @@ def send_push_message(access_token, device_token, private_key_json_file=PRIVATE_
 
 if __name__ == '__main__':
   parser = argparse.ArgumentParser()
+  parser.add_argument('-d', '--device-token', help="give taget device token")
   parser.add_argument('-p', '--private-key-json-file', help="give private key json file")
+  parser.add_argument('-m', '--message-json', help="give message json")
+  parser.add_argument('--print-access-token', action='store_true', help="print access token")
   args = parser.parse_args()
+
+  device_token = None
+  if args.device_token:
+    device_token = args.device_token
 
   private_key_json = PRIVATE_KEY_JSON
   if args.private_key_json_file:
     private_key_json = args.private_key_json_file
-    
 
-  print(get_access_token(private_key_json))
+  message_json = DEFAULT_MESSAGE_JSON
+  if args.message_json:
+    message_json = args.message_json
+
+  access_token = get_access_token(private_key_json)
+
+  if args.print_access_token:
+    print("=== access token ===")
+    print(access_token)
+    print("")
+
+  send_push_message(access_token=access_token, device_token=device_token, private_key_json_file=private_key_json, message_json_file=message_json)
