@@ -1,0 +1,9 @@
+{
+    "message": {
+        "token": "MUST_SET_TARGET_DEVICE_TOKEN",
+        "notification": {
+            "title": "Test Notification",
+            "body": "This is a sample notification"
+        }
+    }
+}
