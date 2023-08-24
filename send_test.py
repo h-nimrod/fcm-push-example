@@ -5,8 +5,14 @@ PRIVATE_KEY_JSON = 'sample-app-firebase-adminsdk-foobar.json' ### modify to matc
 SCOPES = ['https://www.googleapis.com/auth/firebase.messaging']
 
 def get_access_token(private_key_json):
-  """Retrieve a valid access token that can be used to authorize requests.                                                                                        
-  :return: Access token."""
+  """
+  Retrieve a valid access token that can be used to authorize requests.
+
+  Parameter:
+  - private_key_json (str): Path to the JSON file containing the service account's private key.
+
+  Returns: Access token (str).
+  """
 
   credentials = ServiceAccountCredentials.from_json_keyfile_name(private_key_json, SCOPES)
   access_token_info = credentials.get_access_token()
