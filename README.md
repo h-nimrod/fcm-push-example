@@ -13,11 +13,12 @@ This program ues the following modules:
 - argparse
 - json
 - requests
+- oauth2client
 
 If the required modules are not installed, please install them using the command below:
 
 ```sh
-$ pip3 install argparse json requests
+$ pip3 install argparse json requests oauth2client
 ```
 
 ## Example:
