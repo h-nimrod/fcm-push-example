@@ -8,7 +8,21 @@ Place the secret key (json) of the Firebase service account, which is generated 
 $ cp path/to/serviceAccountKey.json sample-app-firebase-adminsdk-foobar.json
 ```
 
+This program ues the following modules:
+
+- argparse
+- json
+- requests
+
+If the required modules are not installed, please install them using the command below:
+
+```sh
+$ pip3 install argparse json requests
+```
+
 ## Example:
+
+Ensure you have obtained the device token of the desired recipient device.
 
 Send a push notification by specifying the target device's token using the -d option.
 
