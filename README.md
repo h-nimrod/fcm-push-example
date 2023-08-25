@@ -55,5 +55,7 @@ Response content:  {
 
 
 ## Reference Site:
-Migrate from legacy FCM APIs to HTTP v1
-https://firebase.google.com/docs/cloud-messaging/migrate-v1
+- Firebase Cloud Messaging REST API
+  - https://firebase.google.com/docs/reference/fcm/rest/v1/projects.messages
+- Migrate from legacy FCM APIs to HTTP v1
+  - https://firebase.google.com/docs/cloud-messaging/migrate-v1
