@@ -18,7 +18,7 @@ This program ues the following modules:
 If the required modules are not installed, please install them using the command below:
 
 ```sh
-$ pip3 install argparse json requests oauth2client
+$ pip install argparse json requests oauth2client
 ```
 
 ## Example:
@@ -28,7 +28,7 @@ Ensure you have obtained the device token of the desired recipient device.
 Send a push notification by specifying the target device's token using the -d option.
 
 ```sh
-$ python3 send_test.py -d d9pCrwUARmCyWDRjumG2SS:APA91xxxx 
+$ python send_test.py -d d9pCrwUARmCyWDRjumG2SS:APA91xxxx 
 === Request ===
 Request message:  {
     "message": {
