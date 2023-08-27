@@ -11,6 +11,27 @@ PRIVATE_KEY_JSON_DEFAULT = 'sample-app-firebase-adminsdk-foobar.json'
 DEFAULT_MESSAGE_JSON = 'sample_message.json'
 SCOPES = ['https://www.googleapis.com/auth/firebase.messaging']
 
+class PushMessageArgs:
+    """
+    A class to encapsulate the arguments required for sending a push message.
+    """
+
+    def __init__(
+            self,
+            token,
+            device_token,
+            private_key_path=PRIVATE_KEY_JSON_DEFAULT,
+            message_json_path=DEFAULT_MESSAGE_JSON,
+            title=None,
+            body=None
+    ):
+        self.token = token
+        self.device_token = device_token
+        self.private_key_path = private_key_path
+        self.message_json_path = message_json_path
+        self.title = title
+        self.body = body
+
 
 def get_access_token(private_key_path):
     """
@@ -55,30 +76,23 @@ def get_project_id_from_json(private_key_path):
     return obj["project_id"]
 
 
-def send_push_message(
-        token,
-        device_token,
-        private_key_path=PRIVATE_KEY_JSON_DEFAULT,
-        message_json_path=DEFAULT_MESSAGE_JSON,
-        title=None,
-        body=None
-):
+def send_push_message(args):
     """
     Send a push notification via Firebase Cloud Messaging (FCM).
     """
-    project_id = get_project_id_from_json(private_key_path)
+    project_id = get_project_id_from_json(args.private_key_path)
     url = f'https://fcm.googleapis.com/v1/projects/{project_id}/messages:send'
 
     headers = {
-        'Authorization': f'Bearer {token}',
+        'Authorization': f'Bearer {args.token}',
         'Content-Type': 'application/json; UTF-8',
     }
 
     message = get_message_json(
-        target_token=device_token,
-        template_json_file=message_json_path,
-        title_str=title,
-        body_str=body
+        target_token=args.device_token,
+        template_json_file=args.message_json_path,
+        title_str=args.title,
+        body_str=args.body
     )
 
     print("=== Request ===")
@@ -110,7 +124,7 @@ if __name__ == '__main__':
         print(access_token)
         print("")
 
-    send_push_message(
+    push_args = PushMessageArgs(
         token=access_token,
         device_token=args.device_token,
         private_key_path=args.private_key_path,
@@ -118,3 +132,5 @@ if __name__ == '__main__':
         title=args.title,
         body=args.body
     )
+
+    send_push_message(push_args)
