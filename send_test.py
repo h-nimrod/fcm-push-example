@@ -66,7 +66,7 @@ def send_push_message(
     print("=== Request ===")
     print("Request message: ", json.dumps(message, indent=4, ensure_ascii=False))
 
-    response = requests.post(url, headers=headers, data=json.dumps(message))
+    response = requests.post(url, headers=headers, data=json.dumps(message), timeout=(10.0, 10.0))
 
     print("\n=== Response ===")
     print("Response status code: ", response.status_code)
