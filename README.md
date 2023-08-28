@@ -53,6 +53,7 @@ Response content:  {
 - `-p PRIVATE_KEY_JSON_FILE, --private-key-json-file PRIVATE_KEY_JSON_FILE`: Specify the secret key of the Firebase service account.
 - `-m MESSAGE_JSON, --message-json MESSAGE_JSON`: Specify the json file of the push notification message to be sent.
 - `-t TITLE, --title TITLE`: Specify title to set for the push notification.
+- `-b BODY, --body BODY`: Specify body to set for the push notification.
 - `--print-access-token`: Display the bearer token used for FCM HTTP v1 protocol.
 
 
