@@ -25,6 +25,7 @@ class PushMessageArgs:
         self.message_json_path = kwargs.get('message_json_path', DEFAULT_MESSAGE_JSON)
         self.title = kwargs.get('title')
         self.body = kwargs.get('body')
+        self.image = kwargs.get('image')
 
 def get_access_token(private_key_path):
     """
@@ -39,7 +40,8 @@ def get_message_json(
         target_token,
         template_json_file=DEFAULT_MESSAGE_JSON,
         title_str=None,
-        body_str=None
+        body_str=None,
+        image_url=None
 ):
     """
     Load a message template from a JSON file and set the target device token.
@@ -55,6 +57,9 @@ def get_message_json(
 
     if body_str:
         obj["message"]["notification"]["body"] = body_str
+
+    if image_url:
+        obj["message"]["notification"]["image"] = image_url
 
     return obj
 
@@ -85,7 +90,8 @@ def send_push_message(push_args):
         target_token=push_args.device_token,
         template_json_file=push_args.message_json_path,
         title_str=push_args.title,
-        body_str=push_args.body
+        body_str=push_args.body,
+        image_url=push_args.image
     )
 
     print("=== Request ===")
@@ -107,6 +113,7 @@ if __name__ == '__main__':
                         help="give message json", default=DEFAULT_MESSAGE_JSON)
     parser.add_argument('-t', '--title', help="give title", default=None)
     parser.add_argument('-b', '--body', help="give body", default=None)
+    parser.add_argument('-i', '--image', help="give image url", default=None)
     parser.add_argument('--print-access-token', action='store_true', help="print access token")
     args = parser.parse_args()
 
@@ -123,7 +130,8 @@ if __name__ == '__main__':
         private_key_path=args.private_key_path,
         message_json_path=args.message_json,
         title=args.title,
-        body=args.body
+        body=args.body,
+        image=args.image
     )
 
     send_push_message(push_args_obj)
