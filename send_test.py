@@ -21,7 +21,12 @@ def get_access_token(private_key_path):
     return access_token_info.access_token
 
 
-def get_message_json(target_token, template_json_file=DEFAULT_MESSAGE_JSON, title_str=None):
+def get_message_json(
+        target_token,
+        template_json_file=DEFAULT_MESSAGE_JSON,
+        title_str=None,
+        body_str=None
+):
     """
     Load a message template from a JSON file and set the target device token.
     """
@@ -33,6 +38,9 @@ def get_message_json(target_token, template_json_file=DEFAULT_MESSAGE_JSON, titl
 
     if title_str:
         obj["message"]["notification"]["title"] = title_str
+
+    if body_str:
+        obj["message"]["notification"]["body"] = body_str
 
     return obj
 
@@ -52,7 +60,8 @@ def send_push_message(
         device_token,
         private_key_path=PRIVATE_KEY_JSON_DEFAULT,
         message_json_path=DEFAULT_MESSAGE_JSON,
-        title=None
+        title=None,
+        body=None
 ):
     """
     Send a push notification via Firebase Cloud Messaging (FCM).
@@ -68,7 +77,8 @@ def send_push_message(
     message = get_message_json(
         target_token=device_token,
         template_json_file=message_json_path,
-        title_str=title
+        title_str=title,
+        body_str=body
     )
 
     print("=== Request ===")
@@ -89,6 +99,7 @@ if __name__ == '__main__':
     parser.add_argument('-m', '--message-json',
                         help="give message json", default=DEFAULT_MESSAGE_JSON)
     parser.add_argument('-t', '--title', help="give title", default=None)
+    parser.add_argument('-b', '--body', help="give body", default=None)
     parser.add_argument('--print-access-token', action='store_true', help="print access token")
     args = parser.parse_args()
 
@@ -104,5 +115,6 @@ if __name__ == '__main__':
         device_token=args.device_token,
         private_key_path=args.private_key_path,
         message_json_path=args.message_json,
-        title=args.title
+        title=args.title,
+        body=args.body
     )
