@@ -54,6 +54,7 @@ Response content:  {
 - `-m MESSAGE_JSON, --message-json MESSAGE_JSON`: Specify the json file of the push notification message to be sent.
 - `-t TITLE, --title TITLE`: Specify title to set for the push notification.
 - `-b BODY, --body BODY`: Specify body to set for the push notification.
+- `-i IMAGE, --image IMAGE`: Specify image icon url to set for the push notification.
 - `--print-access-token`: Display the bearer token used for FCM HTTP v1 protocol.
 
 
